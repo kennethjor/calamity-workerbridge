@@ -1,0 +1,27 @@
+doctype html
+html
+	head
+		title Calamity Worker Bridge Demo
+		style(type="text/css").
+			html, body {
+				margin: 0;
+				padding: 0;
+			}
+			.framecontainer {
+				width: 40%;
+				display: inline-block;
+				padding: 0 10px;
+			}
+			iframe {
+				border: 1px solid black;
+				width: 100%;
+				height: 300px;
+			}
+		body
+			h1 Calamity Worker Bridge Demo
+			.framecontainer
+				h2 Frame 1
+				iframe(src="frame.html")
+			.framecontainer
+				h2 Frame 2
+				iframe(src="frame.html")

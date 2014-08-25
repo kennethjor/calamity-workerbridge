@@ -1,0 +1,9 @@
+syntas: glob
+
+build/
+dist/
+node_modules/
+bower_components/
+.idea/
+_SpecRunner.html
+npm-debug.log
