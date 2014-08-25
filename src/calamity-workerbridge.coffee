@@ -17,8 +17,9 @@ class calamity.WorkerBridge extends calamity.Bridge
 		worker = @_worker = new SharedWorker @_workerUrl
 		port = worker.port
 		# Attach message handler.
-		port.addEventListener "message", (msg) => @handleWorkerMessage msg
+		port.addEventListener "message", ((msg) => @handleWorkerMessage msg), false
 		# Start port.
+		port.postMessage ""
 		port.start()
 
 	# Handles a message coming in from the worker.

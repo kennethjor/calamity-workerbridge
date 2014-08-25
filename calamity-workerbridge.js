@@ -36,11 +36,12 @@ calamity.WorkerBridge = (function(_super) {
     var port, worker;
     worker = this._worker = new SharedWorker(this._workerUrl);
     port = worker.port;
-    port.addEventListener("message", (function(_this) {
+    port.addEventListener("message", ((function(_this) {
       return function(msg) {
         return _this.handleWorkerMessage(msg);
       };
-    })(this));
+    })(this)), false);
+    port.postMessage("");
     return port.start();
   };
 

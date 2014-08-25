@@ -10,6 +10,7 @@ self.addEventListener "connect", (event) ->
 	port.addEventListener "message", do (port) -> (msg) ->
 		handleMessage port, msg
 		return
+	port.start()
 	# Send pong to indicate successful load.
 	port.postMessage "pong"
 	return

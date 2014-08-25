@@ -13,6 +13,7 @@ self.addEventListener("connect", function(event) {
       handleMessage(port, msg);
     };
   })(port));
+  port.start();
   port.postMessage("pong");
 });
 

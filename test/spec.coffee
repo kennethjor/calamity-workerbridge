@@ -1,12 +1,23 @@
-$ ->
+describe "WorkerBridge", ->
 	# Set up the bus and bridge. These are global and will not be reset on every test.
 	bus = calamity.global()
-	bus.subscribe "*", (msg) => console.debug "Message received:", msg.address, msg.data
 	bridge = new calamity.WorkerBridge bus
 
-	describe "WorkerBridge", ->
-		it "should connect", (done) ->
-			_.delay (->
+	it "should be supported", ->
+		expect(calamity.WorkerBridge.isSupported()).toBe true
+
+	it "should connect with bridge", (done) ->
+		if bridge.connected
+			expect(bridge.connected).toBe true
+			done()
+		else
+			bridge.on "connect", ->
 				expect(bridge.connected).toBe true
 				done()
-			), 50
+
+	it "should connect with frame", (done) ->
+		bus.subscribe "test.frame.ready", ->
+			expect(true).toBe true
+			done()
+		console.log "sending init"
+		bus.publish "test.frame.init", "data"

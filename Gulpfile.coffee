@@ -44,7 +44,8 @@ gulp.task "compile", ["compile-main", "compile-worker"]
 
 gulp.task "test-jade", ->
 	gulp.src "./test/*.jade"
-		.pipe jade()
+		.pipe jade
+			pretty: true
 		.pipe gulp.dest "build/"
 
 gulp.task "test-deps", ->
@@ -54,6 +55,7 @@ gulp.task "test-deps", ->
 	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"
 	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/jasmine.css"
 	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/boot.js"
+	bowerFiles.push "node_modules/sinon/lib/sinon.js"
 	bowerFiles.push "calamity-workerbridge.js"
 	bowerFiles.push "calamity-workerbridge-worker.js"
 	#console.log bowerFiles
