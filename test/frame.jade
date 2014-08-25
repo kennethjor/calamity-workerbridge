@@ -1,19 +1,30 @@
 doctype html
 html
 	head
+		// Jasmine and deps.
+		link(rel="stylesheet" type="text/css" href="jasmine.css")
+		script(type="text/javascript", src="jquery.js")
+		script(type="text/javascript", src="jasmine.js")
+		script(type="text/javascript", src="jasmine-html.js")
+		script(type="text/javascript", src="boot.js")
+		// App code and deps.
 		script(type="text/javascript", src="underscore.js")
 		script(type="text/javascript", src="calamity.js")
 		script(type="text/javascript", src="calamity-workerbridge.js")
-		script(type="text/javascript", src="index.js")
-	style(type="text/css").
-		body, html {
-			margin: 0;
-			padding: 0;
-		}
-		textarea {
-			width: 100%;
-			height: 100%;
-			border: none;
-		}
-	body
-		textarea#log
+		// Testing code.
+		script(type="text/javascript", src="spec.js")
+		script(type="text/javascript").
+			(function() {
+				var jasmineEnv = jasmine.getEnv();
+				jasmineEnv.updateInterval = 1000;
+				var currentWindowOnload = window.onload;
+				window.onload = function() {
+					if (currentWindowOnload) {
+						currentWindowOnload();
+					}
+					execJasmine();
+				};
+				function execJasmine() {
+					jasmineEnv.execute();
+				}
+			})();

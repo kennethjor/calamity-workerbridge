@@ -49,6 +49,11 @@ gulp.task "test-jade", ->
 
 gulp.task "test-deps", ->
 	bowerFiles = bower()
+	bowerFiles.push "node_modules/jquery/dist/jquery.js"
+	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/jasmine.js"
+	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"
+	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/jasmine.css"
+	bowerFiles.push "node_modules/jasmine-core/lib/jasmine-core/boot.js"
 	bowerFiles.push "calamity-workerbridge.js"
 	bowerFiles.push "calamity-workerbridge-worker.js"
 	#console.log bowerFiles
@@ -56,9 +61,11 @@ gulp.task "test-deps", ->
 		.pipe gulp.dest "build/"
 
 gulp.task "test-compile", ["compile"], ->
-	gulp.src "./test/index.coffee"
-		.pipe coffee
-			bare: true
+	gulp.src "./test/*.coffee"
+		.pipe sourcemaps.init()
+		.pipe coffee()
+		.pipe sourcemaps.write
+			includeContent: true
 		.pipe gulp.dest "build/"
 
 gulp.task "test", ["test-jade", "test-deps", "test-compile"]
